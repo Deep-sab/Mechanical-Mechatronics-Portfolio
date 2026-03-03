@@ -15,3 +15,6 @@ Welcome to my engineering portfolio. This repository documents hands-on mechanic
 - Control Systems & System Validation
 
 ---
+
+## Designs
+
