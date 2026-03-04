@@ -18,4 +18,6 @@ Welcome to my engineering portfolio. This repository documents hands-on mechanic
 
 ## Designs
 
-![Cart Project](Cart.png)
+Cart Project
+An exercise to get comfortable with both SolidWorks and CREO
+![Cart Project](Cart.png) ![Cart Project Drawing](
