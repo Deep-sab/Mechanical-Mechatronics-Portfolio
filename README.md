@@ -20,5 +20,7 @@ Welcome to my engineering portfolio. This repository documents hands-on mechanic
 
 Cart Project
 An exercise to get comfortable with both SolidWorks and CREO
-| ![Cart Project](Cart.png)  |  ![Cart Project Drawing](Cart_Drawing.png) |
 | Assembly | Drawing |
+|-----|----|
+| ![Cart Project](Cart.png)  |  ![Cart Project Drawing](Cart_Drawing.png) |
+
