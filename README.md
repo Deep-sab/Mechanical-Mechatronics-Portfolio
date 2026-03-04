@@ -45,3 +45,7 @@ An exercise to get comfortable with both SolidWorks and CREO
 ![Cart Project](Cart.png)  
 ![Cart Project Drawing](Cart_Drawing.png) 
 
+Speaker mount
+![Spreaker_stand](Speaker_stand.png)
+
+
