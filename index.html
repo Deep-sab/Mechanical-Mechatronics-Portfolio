@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deeptha Sabarish — Mechanical & Mechatronics Portfolio</title>
+<meta name="description" content="Mechanical and Mechatronics Engineering Portfolio by Deeptha Sabarish. Projects spanning embedded systems, CAD, product development and manufacturing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1a18;
+  --ink2:#4a4a46;
+  --ink3:#8a8a84;
+  --cream:#f5f2ec;
+  --warm:#ede9e1;
+  --accent:#c4622a;
+  --accent2:#1d6b5c;
+  --line:rgba(0,0,0,0.1);
+  --card:#ffffff;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --ink:#f0ede6;
+    --ink2:#b8b5ae;
+    --ink3:#6b6864;
+    --cream:#1a1916;
+    --warm:#222120;
+    --accent:#e07a46;
+    --accent2:#3aaa8e;
+    --line:rgba(255,255,255,0.08);
+    --card:#252421;
+  }
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.6;
+  min-height:100vh;
+}
+
+/* ── LAYOUT ── */
+.portfolio{max-width:920px;margin:0 auto;padding:0 2rem 6rem;}
+
+/* ── HERO ── */
+.hero{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  gap:2rem;
+  padding:4rem 0 2.5rem;
+  border-bottom:1px solid var(--line);
+}
+@media(max-width:600px){
+  .hero{grid-template-columns:1fr;gap:1.5rem;}
+  .hero-tags{flex-direction:row;flex-wrap:wrap;align-items:flex-start;}
+}
+.hero-label{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-bottom:1.1rem;
+}
+.hero-name{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.6rem,7vw,4.2rem);
+  line-height:1.05;
+  color:var(--ink);
+  margin-bottom:0.85rem;
+}
+.hero-name em{
+  font-style:italic;
+  color:var(--accent);
+}
+.hero-bio{
+  font-size:14px;
+  color:var(--ink2);
+  font-weight:300;
+  max-width:440px;
+  line-height:1.75;
+}
+.hero-tags{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+}
+.tag{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:5px 11px;
+  border:0.5px solid var(--line);
+  border-radius:2px;
+  color:var(--ink3);
+  background:var(--warm);
+  white-space:nowrap;
+}
+
+/* ── NAV ── */
+.nav-strip{
+  display:flex;
+  gap:2rem;
+  padding:1.4rem 0;
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;
+  scrollbar-width:none;
+  position:sticky;
+  top:0;
+  background:var(--cream);
+  z-index:10;
+}
+.nav-strip::-webkit-scrollbar{display:none}
+.nav-btn{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  cursor:pointer;
+  border:none;
+  background:none;
+  padding:0;
+  white-space:nowrap;
+  transition:color 0.2s;
+  position:relative;
+}
+.nav-btn.active,.nav-btn:hover{color:var(--ink);}
+.nav-btn.active::after{
+  content:'';
+  position:absolute;
+  bottom:-1.4rem;
+  left:0;right:0;height:1.5px;
+  background:var(--accent);
+}
+
+/* ── SECTIONS ── */
+.section{display:none;padding-top:3rem;animation:fadeUp 0.3s ease;}
+.section.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.section-eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:1.5rem;
+}
+.section-heading{
+  font-family:'DM Serif Display',serif;
+  font-size:2rem;
+  line-height:1.15;
+  margin-bottom:0.5rem;
+}
+
+/* ── PROJECT GRID ── */
+.proj-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:4px;
+  overflow:hidden;
+  margin-top:2.5rem;
+}
+.proj-card{
+  background:var(--card);
+  padding:1.6rem;
+  cursor:pointer;
+  transition:background 0.2s;
+  display:flex;
+  flex-direction:column;
+  gap:0.8rem;
+}
+.proj-card:hover{background:var(--warm);}
+.proj-number{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:var(--ink3);
+}
+.proj-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.2rem;
+  line-height:1.25;
+  color:var(--ink);
+}
+.proj-desc{
+  font-size:13px;
+  color:var(--ink2);
+  line-height:1.7;
+  flex:1;
+}
+.proj-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  margin-top:auto;
+}
+.chip{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:1px;
+  border:0.5px solid var(--line);
+  color:var(--ink3);
+}
+.chip.mech{border-color:var(--accent);color:var(--accent);}
+.chip.elec{border-color:var(--accent2);color:var(--accent2);}
+
+/* ── DETAIL PANEL ── */
+.proj-detail{
+  display:none;
+  position:relative;
+  margin-top:2rem;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:2.25rem;
+}
+.proj-detail.open{display:block;animation:fadeUp 0.25s ease;}
+.detail-close{
+  position:absolute;top:1.25rem;right:1.25rem;
+  border:none;background:none;cursor:pointer;
+  font-size:16px;color:var(--ink3);
+  font-family:'DM Mono',monospace;
+  transition:color 0.15s;
+}
+.detail-close:hover{color:var(--ink);}
+.detail-label{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:0.6rem;
+}
+.detail-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.7rem;
+  margin-bottom:1.1rem;
+}
+.detail-body{
+  font-size:14px;
+  color:var(--ink2);
+  line-height:1.8;
+  max-width:600px;
+}
+.detail-specs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1rem;
+  margin-top:1.75rem;
+  padding-top:1.75rem;
+  border-top:1px solid var(--line);
+}
+.spec-label{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-bottom:3px;
+}
+.spec-val{
+  font-size:13px;
+  color:var(--ink);
+  font-weight:500;
+}
+
+/* ── SKILLS ── */
+.skills-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:4px;
+  overflow:hidden;
+  margin-top:2.5rem;
+}
+@media(max-width:560px){.skills-grid{grid-template-columns:1fr;}}
+.skill-block{
+  background:var(--card);
+  padding:1.6rem;
+}
+.skill-block-title{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:1.1rem;
+}
+.skill-list{display:flex;flex-direction:column;gap:0.6rem;}
+.skill-row{display:flex;align-items:center;gap:0.75rem;}
+.skill-name{
+  font-size:13px;
+  color:var(--ink2);
+  min-width:150px;
+}
+.skill-bar{
+  flex:1;
+  height:2px;
+  background:var(--line);
+  border-radius:1px;
+  overflow:hidden;
+}
+.skill-fill{
+  height:100%;
+  background:var(--accent2);
+  border-radius:1px;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.skills-animated .skill-fill{transform:scaleX(1);}
+
+/* ── ABOUT ── */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  gap:3rem;
+  margin-top:2.5rem;
+}
+@media(max-width:620px){
+  .about-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-divider{display:none;}
+}
+.about-divider{background:var(--line);}
+.about-intro{
+  font-size:14px;
+  color:var(--ink2);
+  line-height:1.85;
+}
+.about-intro p+p{margin-top:1rem;}
+.timeline{display:flex;flex-direction:column;}
+.tl-item{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:1rem;
+  padding:0.85rem 0;
+  border-bottom:0.5px solid var(--line);
+}
+.tl-year{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:var(--ink3);
+  padding-top:2px;
+}
+.tl-event{font-size:13px;color:var(--ink2);}
+.tl-event strong{
+  display:block;
+  font-weight:500;
+  color:var(--ink);
+  margin-bottom:2px;
+}
+
+/* ── CONTACT ── */
+.contact-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  margin-top:2.5rem;
+  max-width:480px;
+}
+.contact-row{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 1.25rem;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:4px;
+  text-decoration:none;
+  color:var(--ink);
+  transition:border-color 0.2s,background 0.2s;
+}
+.contact-row:hover{border-color:var(--accent);background:var(--warm);}
+.contact-icon{
+  font-size:22px;
+  color:var(--accent);
+  width:26px;
+  flex-shrink:0;
+}
+.contact-label{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-bottom:2px;
+}
+.contact-value{font-size:14px;color:var(--ink);font-weight:500;}
+
+/* ── FOOTER ── */
+footer{
+  margin-top:5rem;
+  padding-top:2rem;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.footer-name{
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem;
+  color:var(--ink);
+}
+.footer-copy{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:var(--ink3);
+}
+</style>
+</head>
+<body>
+
+<div class="portfolio">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <div class="hero-label">Engineering Portfolio</div>
+      <h1 class="hero-name">Deeptha<br><em>Sabarish</em></h1>
+      <p class="hero-bio">Mechanical &amp; Mechatronics Engineer. Building at the intersection of precision hardware, embedded systems, and real-world manufacturing.</p>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">SolidWorks · CREO</span>
+      <span class="tag">Embedded Systems</span>
+      <span class="tag">DFM · GD&amp;T</span>
+      <span class="tag">Product Dev</span>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav-strip" role="navigation" aria-label="Portfolio sections">
+    <button class="nav-btn active" onclick="showSection('projects',this)">Projects</button>
+    <button class="nav-btn" onclick="showSection('skills',this)">Skills</button>
+    <button class="nav-btn" onclick="showSection('about',this)">About</button>
+    <button class="nav-btn" onclick="showSection('contact',this)">Contact</button>
+  </nav>
+
+  <!-- ═══════════ PROJECTS ═══════════ -->
+  <section id="projects" class="section active" aria-label="Projects">
+    <div class="section-eyebrow">Selected work</div>
+    <h2 class="section-heading">Projects &amp; prototypes</h2>
+
+    <div class="proj-grid">
+
+      <article class="proj-card" onclick="openDetail('emg')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('emg')" aria-expanded="false" id="card-emg">
+        <div class="proj-number">01 — Mechatronics</div>
+        <h3 class="proj-title">Real-time EMG Gesture Recognition</h3>
+        <p class="proj-desc">Triple-channel custom EMG sensors with signal processing algorithms to classify hand gestures in real time. Started as a choreography aid, evolved into a health-monitoring platform concept.</p>
+        <div class="proj-chips">
+          <span class="chip elec">Custom PCB</span>
+          <span class="chip elec">Signal Processing</span>
+          <span class="chip">Embedded C</span>
+          <span class="chip">Sensor Fusion</span>
+        </div>
+      </article>
+
+      <article class="proj-card" onclick="openDetail('pov')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('pov')" id="card-pov">
+        <div class="proj-number">02 — Mechatronics</div>
+        <h3 class="proj-title">Persistence of Vision Display</h3>
+        <p class="proj-desc">Arduino Nano–controlled system synchronising an LED strip with a DC motor to render static images through the persistence-of-vision effect. Demonstrates real-time motor–LED timing coordination.</p>
+        <div class="proj-chips">
+          <span class="chip elec">Arduino Nano</span>
+          <span class="chip mech">Mechanical Design</span>
+          <span class="chip">DC Motor Control</span>
+        </div>
+      </article>
+
+      <article class="proj-card" onclick="openDetail('pump')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('pump')" id="card-pump">
+        <div class="proj-number">03 — Mechanical</div>
+        <h3 class="proj-title">Peristaltic Pump Prototype</h3>
+        <p class="proj-desc">Reverse-engineered and redesigned an existing peristaltic pump for improved manufacturability and broader application range. Focus on DFM, tolerancing, and assembly simplification.</p>
+        <div class="proj-chips">
+          <span class="chip mech">DFM</span>
+          <span class="chip mech">Reverse Engineering</span>
+          <span class="chip">Tolerancing</span>
+        </div>
+      </article>
+
+      <article class="proj-card" onclick="openDetail('valve')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('valve')" id="card-valve">
+        <div class="proj-number">04 — Mechatronics</div>
+        <h3 class="proj-title">Valve Automation System</h3>
+        <p class="proj-desc">Designed and integrated an actuation solution for automating industrial valve operation. Covers mechanical mounting, actuator selection, and control interfacing.</p>
+        <div class="proj-chips">
+          <span class="chip elec">Actuation</span>
+          <span class="chip mech">Mechanical Integration</span>
+          <span class="chip">Control</span>
+        </div>
+      </article>
+
+      <article class="proj-card" onclick="openDetail('cart')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('cart')" id="card-cart">
+        <div class="proj-number">05 — CAD</div>
+        <h3 class="proj-title">Cart Assembly — SolidWorks &amp; CREO</h3>
+        <p class="proj-desc">Full parametric cart assembly modelled in both SolidWorks and CREO, including detailed engineering drawings with GD&amp;T annotations. An exercise in cross-platform CAD fluency.</p>
+        <div class="proj-chips">
+          <span class="chip mech">SolidWorks</span>
+          <span class="chip mech">CREO</span>
+          <span class="chip">GD&amp;T</span>
+          <span class="chip">Drawings</span>
+        </div>
+      </article>
+
+      <article class="proj-card" onclick="openDetail('speaker')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('speaker')" id="card-speaker">
+        <div class="proj-number">06 — CAD</div>
+        <h3 class="proj-title">Speaker Stand Mount</h3>
+        <p class="proj-desc">Parametric speaker stand design with focus on structural rigidity, vibration damping considerations, and clean aesthetics. Demonstrates consumer product CAD sensibility.</p>
+        <div class="proj-chips">
+          <span class="chip mech">Structural Design</span>
+          <span class="chip mech">SolidWorks</span>
+          <span class="chip">Product Design</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Detail panels -->
+    <div id="detail-emg" class="proj-detail" role="region" aria-label="EMG project details">
+      <button class="detail-close" onclick="closeDetail('emg')" aria-label="Close detail">✕</button>
+      <div class="detail-label">Project 01 — Mechatronics</div>
+      <h3 class="detail-title">Real-time EMG Gesture Recognition</h3>
+      <p class="detail-body">A triple-channel electromyography (EMG) sensor system built from scratch to capture and classify muscle signals in real time. Custom analog front-end circuits amplify and filter raw bio-signals before a microcontroller runs signal-processing algorithms to distinguish gesture classes. The system was initially conceived to record arm movements for classical dance choreography, then extended toward a broader health and injury-prevention monitoring concept.</p>
+      <div class="detail-specs">
+        <div><div class="spec-label">Channels</div><div class="spec-val">3 × custom EMG</div></div>
+        <div><div class="spec-label">Interface</div><div class="spec-val">Real-time classification</div></div>
+        <div><div class="spec-label">Application</div><div class="spec-val">Health monitoring / Dance</div></div>
+        <div><div class="spec-label">Domain</div><div class="spec-val">Biosignals · Embedded</div></div>
+      </div>
+    </div>
+
+    <div id="detail-pov" class="proj-detail" role="region" aria-label="POV project details">
+      <button class="detail-close" onclick="closeDetail('pov')" aria-label="Close detail">✕</button>
+      <div class="detail-label">Project 02 — Mechatronics</div>
+      <h3 class="detail-title">Persistence of Vision Display</h3>
+      <p class="detail-body">An Arduino Nano orchestrates a spinning LED strip and DC motor to produce the persistence-of-vision illusion — where a rapidly sweeping row of LEDs appears as a full 2D image to the human eye. The core challenge is precise timing synchronisation between the motor's rotational speed and the LED update rate. The project demonstrates real-time interrupt handling, PWM motor control, and LED driver coding.</p>
+      <div class="detail-specs">
+        <div><div class="spec-label">Controller</div><div class="spec-val">Arduino Nano</div></div>
+        <div><div class="spec-label">Actuation</div><div class="spec-val">DC motor + LED strip</div></div>
+        <div><div class="spec-label">Technique</div><div class="spec-val">POV timing sync</div></div>
+        <div><div class="spec-label">Domain</div><div class="spec-val">Embedded · Mechanical</div></div>
+      </div>
+    </div>
+
+    <div id="detail-pump" class="proj-detail" role="region" aria-label="Pump project details">
+      <button class="detail-close" onclick="closeDetail('pump')" aria-label="Close detail">✕</button>
+      <div class="detail-label">Project 03 — Mechanical</div>
+      <h3 class="detail-title">Peristaltic Pump Prototype</h3>
+      <p class="detail-body">Starting from an existing peristaltic pump design, this project reverse-engineered the mechanism to understand its principles and then redesigned key components for ease of manufacture and broader application. Improvements focused on simplifying the rotor geometry, reducing part count, and specifying tolerances that support low-cost fabrication methods without sacrificing performance.</p>
+      <div class="detail-specs">
+        <div><div class="spec-label">Method</div><div class="spec-val">Reverse engineering</div></div>
+        <div><div class="spec-label">Focus</div><div class="spec-val">DFM + manufacturability</div></div>
+        <div><div class="spec-label">Outcome</div><div class="spec-val">Simplified assembly</div></div>
+        <div><div class="spec-label">Domain</div><div class="spec-val">Mechanical Design</div></div>
+      </div>
+    </div>
+
+    <div id="detail-valve" class="proj-detail" role="region" aria-label="Valve project details">
+      <button class="detail-close" onclick="closeDetail('valve')" aria-label="Close detail">✕</button>
+      <div class="detail-label">Project 04 — Mechatronics</div>
+      <h3 class="detail-title">Valve Automation System</h3>
+      <p class="detail-body">Designed an electromechanical solution to automate the operation of an existing manual valve. The work covered actuator selection, mechanical bracket and coupling design to mount the actuator onto the valve body, and control interfacing to enable remote or automated operation. Special attention was paid to maintaining back-compatibility with manual override.</p>
+      <div class="detail-specs">
+        <div><div class="spec-label">Type</div><div class="spec-val">Valve automation</div></div>
+        <div><div class="spec-label">Actuation</div><div class="spec-val">Electromechanical</div></div>
+        <div><div class="spec-label">Feature</div><div class="spec-val">Manual override</div></div>
+        <div><div class="spec-label">Domain</div><div class="spec-val">Control · Mechanical</div></div>
+      </div>
+    </div>
+
+    <div id="detail-cart" class="proj-detail" role="region" aria-label="Cart project details">
+      <button class="detail-close" onclick="closeDetail('cart')" aria-label="Close detail">✕</button>
+      <div class="detail-label">Project 05 — CAD</div>
+      <h3 class="detail-title">Cart Assembly — SolidWorks &amp; CREO</h3>
+      <p class="detail-body">A fully parametric cart assembly modelled in parallel in SolidWorks and CREO to develop fluency across both platforms. Deliverables include a complete assembly with mated components and formal engineering drawings annotated with GD&amp;T callouts per ASME Y14.5. The project reinforces best practices in part modelling, assembly constraints, and drawing standards.</p>
+      <div class="detail-specs">
+        <div><div class="spec-label">Tools</div><div class="spec-val">SolidWorks + CREO</div></div>
+        <div><div class="spec-label">Standard</div><div class="spec-val">ASME Y14.5 GD&amp;T</div></div>
+        <div><div class="spec-label">Deliverable</div><div class="spec-val">Assembly + drawings</div></div>
+        <div><div class="spec-label">Domain</div><div class="spec-val">CAD · Engineering Drawing</div></div>
+      </div>
+    </div>
+
+    <div id="detail-speaker" class="proj-detail" role="region" aria-label="Speaker stand project details">
+      <button class="detail-close" onclick="closeDetail('speaker')" aria-label="Close detail">✕</button>
+      <div class="detail-label">Project 06 — CAD</div>
+      <h3 class="detail-title">Speaker Stand Mount</h3>
+      <p class="detail-body">A parametric CAD model for a speaker stand mount combining structural rigidity with clean consumer-product aesthetics. The design accounts for load paths, vibration isolation, and material efficiency. An exercise in balancing engineering requirements with form considerations relevant to product development roles.</p>
+      <div class="detail-specs">
+        <div><div class="spec-label">Tool</div><div class="spec-val">SolidWorks</div></div>
+        <div><div class="spec-label">Focus</div><div class="spec-val">Structure + aesthetics</div></div>
+        <div><div class="spec-label">Domain</div><div class="spec-val">Product Design · CAD</div></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════ SKILLS ═══════════ -->
+  <section id="skills" class="section" aria-label="Skills">
+    <div class="section-eyebrow">Capabilities</div>
+    <h2 class="section-heading">Skills &amp; tools</h2>
+    <div class="skills-grid" id="skills-grid">
+      <div class="skill-block">
+        <div class="skill-block-title">Mechanical Design</div>
+        <div class="skill-list">
+          <div class="skill-row"><span class="skill-name">SolidWorks</span><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">CREO / PTC</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">GD&amp;T (ASME Y14.5)</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">DFM / DFA</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Reverse Engineering</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title">Embedded &amp; Electronics</div>
+        <div class="skill-list">
+          <div class="skill-row"><span class="skill-name">Arduino / AVR</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Analog circuit design</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Signal processing</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Sensor integration</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Motor &amp; actuator control</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title">Systems &amp; Manufacturing</div>
+        <div class="skill-list">
+          <div class="skill-row"><span class="skill-name">System validation</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Prototyping</span><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Tooling development</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Product development</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title">Programming</div>
+        <div class="skill-list">
+          <div class="skill-row"><span class="skill-name">C / Embedded C</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">MATLAB / Simulink</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section id="about" class="section" aria-label="About">
+    <div class="section-eyebrow">Background</div>
+    <h2 class="section-heading">About Deeptha</h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-intro">
+          <p>Mechanical and Mechatronics engineer with a passion for building things that sit at the boundary of precision hardware and intelligent control — from custom biosignal sensors to manufacturable pump prototypes.</p>
+          <p>Projects span the full development arc: sketching concepts, modelling in CAD, building physical prototypes, writing firmware, and validating against requirements.</p>
+          <p>A background in classical dance informed an early biometric sensing project — a recurring theme across the work is turning curiosity into concrete, engineered artefacts.</p>
+        </div>
+      </div>
+      <div class="about-divider" aria-hidden="true"></div>
+      <div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">Now</div>
+            <div class="tl-event"><strong>Mechanical &amp; Mechatronics Engineer</strong>Embedded systems, CAD, product development</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-event"><strong>EMG Gesture Recognition System</strong>Custom biosignal hardware + real-time classification</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-event"><strong>Persistence of Vision Display</strong>Motor–LED synchronisation project</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Prior</div>
+            <div class="tl-event"><strong>Peristaltic Pump · Valve Automation</strong>DFM redesign and electromechanical integration</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Core</div>
+            <div class="tl-event"><strong>CAD in SolidWorks &amp; CREO</strong>Assemblies, engineering drawings, GD&amp;T</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section id="contact" class="section" aria-label="Contact">
+    <div class="section-eyebrow">Get in touch</div>
+    <h2 class="section-heading">Contact</h2>
+    <div class="contact-wrap">
+      <a class="contact-row" href="https://github.com/Deep-sab/Mechanical-Mechatronics-Portfolio" target="_blank" rel="noopener">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.338c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.021C22 6.484 17.522 2 12 2z"/></svg>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">Deep-sab / Mechanical-Mechatronics-Portfolio</div>
+        </div>
+      </a>
+      <!-- ✏️ Replace the href and value below with your actual email -->
+      <a class="contact-row" href="mailto:your@email.com">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">your@email.com</div>
+        </div>
+      </a>
+      <!-- ✏️ Replace the href and value below with your LinkedIn URL -->
+      <a class="contact-row" href="https://linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">linkedin.com/in/YOUR-HANDLE</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Deeptha Sabarish</div>
+    <div class="footer-copy">Mechanical &amp; Mechatronics Engineer &mdash; <span id="year"></span></div>
+  </footer>
+
+</div>
+
+<script>
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Section switching
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // Animate skill bars when skills section opens
+  if (id === 'skills') {
+    setTimeout(() => {
+      document.querySelectorAll('.skill-fill').forEach(el => {
+        el.style.width = el.style.getPropertyValue('--w') || el.getAttribute('style').match(/--w:([\d%]+)/)?.[1] || '0%';
+      });
+      document.getElementById('skills-grid').classList.add('skills-animated');
+    }, 80);
+  }
+}
+
+// Project detail expand/collapse
+function openDetail(id) {
+  document.querySelectorAll('.proj-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.proj-card').forEach(c => c.setAttribute('aria-expanded','false'));
+  var el = document.getElementById('detail-' + id);
+  var card = document.getElementById('card-' + id);
+  el.classList.add('open');
+  if (card) card.setAttribute('aria-expanded','true');
+  setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
+}
+function closeDetail(id) {
+  document.getElementById('detail-' + id).classList.remove('open');
+  var card = document.getElementById('card-' + id);
+  if (card) card.setAttribute('aria-expanded','false');
+}
+</script>
+</body>
+</html>
