@@ -269,34 +269,103 @@ body{
   max-width:600px;
 }
 
-/* ── DETAIL MEDIA ── */
-.detail-media{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1rem;
+/* ── MEDIA CAROUSEL ── */
+.media-carousel{
+  position:relative;
   margin-top:1.75rem;
 }
-.detail-figure{margin:0;}
-.detail-figure img,
-.detail-figure video{
+.carousel-viewport{
+  overflow:hidden;
+  border-radius:3px;
+  border:1px solid var(--line);
+  background:#0a0908;
+}
+.carousel-track{
+  display:flex;
+  transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.carousel-slide{
+  flex:0 0 100%;
+  min-width:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:#0a0908;
+}
+.carousel-slide img,
+.carousel-slide video{
+  display:block;
   width:100%;
   height:auto;
-  max-height:420px;
-  object-fit:cover;
-  border-radius:3px;
-  display:block;
-  background:var(--warm);
-  border:1px solid var(--line);
+  max-height:480px;
+  object-fit:contain;
+  background:#0a0908;
 }
-.detail-figure video{background:#000;}
-.detail-figure figcaption{
+.carousel-slide figcaption{
   font-family:'DM Mono',monospace;
   font-size:10px;
   letter-spacing:0.1em;
   text-transform:uppercase;
   color:var(--ink3);
-  margin-top:6px;
+  padding:8px 12px;
+  width:100%;
+  background:var(--card);
+  border-top:1px solid var(--line);
+  text-align:center;
 }
+.carousel-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:36px;height:36px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  border-radius:50%;
+  cursor:pointer;
+  font-size:20px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background 0.15s, border-color 0.15s, color 0.15s;
+  z-index:2;
+  opacity:0.92;
+  padding:0;
+  font-family:'Outfit',sans-serif;
+}
+.carousel-btn:hover{
+  background:var(--warm);
+  border-color:var(--accent);
+  color:var(--accent);
+}
+.carousel-prev{left:10px;}
+.carousel-next{right:10px;}
+.media-carousel[data-slides="1"] .carousel-btn,
+.media-carousel[data-slides="1"] .carousel-dots{display:none;}
+.carousel-dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:0.75rem;
+}
+.dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  border:0;
+  background:var(--ink3);
+  opacity:0.35;
+  cursor:pointer;
+  padding:0;
+  transition:opacity 0.15s, background 0.15s, transform 0.15s;
+}
+.dot.active{
+  opacity:1;
+  background:var(--accent);
+  transform:scale(1.3);
+}
+.dot:hover{opacity:0.75;}
 
 .detail-specs{
   display:grid;
@@ -586,15 +655,30 @@ footer{
       <div class="detail-label">Project 01 — Mechatronics</div>
       <h3 class="detail-title">Real-time EMG Gesture Recognition</h3>
       <p class="detail-body">A triple-channel electromyography (EMG) sensor system built from scratch to capture and classify muscle signals in real time. Custom analog front-end circuits amplify and filter raw bio-signals before a microcontroller runs signal-processing algorithms to distinguish gesture classes. The system was initially conceived to record arm movements for classical dance choreography, then extended toward a broader health and injury-prevention monitoring concept.</p>
-      <div class="detail-media">
-        <figure class="detail-figure">
-          <img src="Custom_EMG.jpeg" alt="Custom 3-channel EMG sensor hardware" loading="lazy">
-          <figcaption>Custom 3-channel EMG front-end</figcaption>
-        </figure>
-        <figure class="detail-figure">
-          <video src="Gesture_Recognition.mp4" controls preload="metadata" poster="Custom_EMG.jpeg" playsinline></video>
-          <figcaption>Real-time gesture classification demo</figcaption>
-        </figure>
+      <div class="media-carousel" data-slides="3">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <figure class="carousel-slide">
+              <img src="Custom_EMG.jpeg" alt="Custom 3-channel EMG sensor hardware" loading="lazy">
+              <figcaption>Custom 3-channel EMG front-end</figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <video src="Gesture_Recognition.mp4" controls preload="metadata" poster="Custom_EMG.jpeg" playsinline></video>
+              <figcaption>Real-time gesture classification demo</figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <video src="ProofOfConcept.mp4" controls preload="metadata" playsinline></video>
+              <figcaption>Proof of concept</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-prev" aria-label="Previous slide">&lsaquo;</button>
+        <button class="carousel-btn carousel-next" aria-label="Next slide">&rsaquo;</button>
+        <div class="carousel-dots">
+          <button class="dot active" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+          <button class="dot" aria-label="Slide 3"></button>
+        </div>
       </div>
       <div class="detail-specs">
         <div><div class="spec-label">Channels</div><div class="spec-val">3 × custom EMG</div></div>
@@ -609,11 +693,25 @@ footer{
       <div class="detail-label">Project 02 — Mechatronics</div>
       <h3 class="detail-title">Persistence of Vision Display</h3>
       <p class="detail-body">An Arduino Nano orchestrates a spinning LED strip and DC motor to produce the persistence-of-vision illusion — where a rapidly sweeping row of LEDs appears as a full 2D image to the human eye. The core challenge is precise timing synchronisation between the motor's rotational speed and the LED update rate. The project demonstrates real-time interrupt handling, PWM motor control, and LED driver coding.</p>
-      <div class="detail-media">
-        <figure class="detail-figure">
-          <img src="Persistence_of_Vision.png" alt="Persistence of vision display CAD render" loading="lazy">
-          <figcaption>CAD model — POV display assembly</figcaption>
-        </figure>
+      <div class="media-carousel" data-slides="2">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <figure class="carousel-slide">
+              <img src="Persistence_of_Vision.png" alt="Persistence of vision display CAD render" loading="lazy">
+              <figcaption>CAD model — POV display assembly</figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <video src="POV.mp4" controls preload="metadata" poster="Persistence_of_Vision.png" playsinline></video>
+              <figcaption>POV display in motion</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-prev" aria-label="Previous slide">&lsaquo;</button>
+        <button class="carousel-btn carousel-next" aria-label="Next slide">&rsaquo;</button>
+        <div class="carousel-dots">
+          <button class="dot active" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+        </div>
       </div>
       <div class="detail-specs">
         <div><div class="spec-label">Controller</div><div class="spec-val">Arduino Nano</div></div>
@@ -628,11 +726,15 @@ footer{
       <div class="detail-label">Project 03 — Mechanical</div>
       <h3 class="detail-title">Peristaltic Pump Prototype</h3>
       <p class="detail-body">Starting from an existing peristaltic pump design, this project reverse-engineered the mechanism to understand its principles and then redesigned key components for ease of manufacture and broader application. Improvements focused on simplifying the rotor geometry, reducing part count, and specifying tolerances that support low-cost fabrication methods without sacrificing performance.</p>
-      <div class="detail-media">
-        <figure class="detail-figure">
-          <img src="Peristaltic_Pump.jpeg" alt="Peristaltic pump prototype" loading="lazy">
-          <figcaption>Redesigned peristaltic pump prototype</figcaption>
-        </figure>
+      <div class="media-carousel" data-slides="1">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <figure class="carousel-slide">
+              <img src="Peristaltic_Pump.jpeg" alt="Peristaltic pump prototype" loading="lazy">
+              <figcaption>Redesigned peristaltic pump prototype</figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
       <div class="detail-specs">
         <div><div class="spec-label">Method</div><div class="spec-val">Reverse engineering</div></div>
@@ -647,15 +749,25 @@ footer{
       <div class="detail-label">Project 04 — Mechatronics</div>
       <h3 class="detail-title">Valve Automation System</h3>
       <p class="detail-body">Designed an electromechanical solution to automate the operation of an existing manual valve. The work covered actuator selection, mechanical bracket and coupling design to mount the actuator onto the valve body, and control interfacing to enable remote or automated operation. Special attention was paid to maintaining back-compatibility with manual override.</p>
-      <div class="detail-media">
-        <figure class="detail-figure">
-          <img src="Automating_valve.jpeg" alt="Valve automation — actuator mounting" loading="lazy">
-          <figcaption>Actuator mounting assembly</figcaption>
-        </figure>
-        <figure class="detail-figure">
-          <img src="Automating_valve1.jpeg" alt="Valve automation — integrated view" loading="lazy">
-          <figcaption>Integrated system view</figcaption>
-        </figure>
+      <div class="media-carousel" data-slides="2">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <figure class="carousel-slide">
+              <img src="Automating_valve.jpeg" alt="Valve automation — actuator mounting" loading="lazy">
+              <figcaption>Actuator mounting assembly</figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <img src="Automating_valve1.jpeg" alt="Valve automation — integrated view" loading="lazy">
+              <figcaption>Integrated system view</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-prev" aria-label="Previous slide">&lsaquo;</button>
+        <button class="carousel-btn carousel-next" aria-label="Next slide">&rsaquo;</button>
+        <div class="carousel-dots">
+          <button class="dot active" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+        </div>
       </div>
       <div class="detail-specs">
         <div><div class="spec-label">Type</div><div class="spec-val">Valve automation</div></div>
@@ -670,15 +782,25 @@ footer{
       <div class="detail-label">Project 05 — CAD</div>
       <h3 class="detail-title">Cart Assembly — SolidWorks &amp; CREO</h3>
       <p class="detail-body">A fully parametric cart assembly modelled in parallel in SolidWorks and CREO to develop fluency across both platforms. Deliverables include a complete assembly with mated components and formal engineering drawings annotated with GD&amp;T callouts per ASME Y14.5. The project reinforces best practices in part modelling, assembly constraints, and drawing standards.</p>
-      <div class="detail-media">
-        <figure class="detail-figure">
-          <img src="Cart.png" alt="Cart assembly — 3D model" loading="lazy">
-          <figcaption>Parametric cart assembly</figcaption>
-        </figure>
-        <figure class="detail-figure">
-          <img src="Cart_Drawing.png" alt="Cart engineering drawing with GD&T" loading="lazy">
-          <figcaption>Engineering drawing — GD&amp;T per ASME Y14.5</figcaption>
-        </figure>
+      <div class="media-carousel" data-slides="2">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <figure class="carousel-slide">
+              <img src="Cart.png" alt="Cart assembly — 3D model" loading="lazy">
+              <figcaption>Parametric cart assembly</figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <img src="Cart_Drawing.png" alt="Cart engineering drawing with GD&T" loading="lazy">
+              <figcaption>Engineering drawing — GD&amp;T per ASME Y14.5</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-prev" aria-label="Previous slide">&lsaquo;</button>
+        <button class="carousel-btn carousel-next" aria-label="Next slide">&rsaquo;</button>
+        <div class="carousel-dots">
+          <button class="dot active" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+        </div>
       </div>
       <div class="detail-specs">
         <div><div class="spec-label">Tools</div><div class="spec-val">SolidWorks + CREO</div></div>
@@ -693,11 +815,15 @@ footer{
       <div class="detail-label">Project 06 — CAD</div>
       <h3 class="detail-title">Speaker Stand Mount</h3>
       <p class="detail-body">A parametric CAD model for a speaker stand mount combining structural rigidity with clean consumer-product aesthetics. The design accounts for load paths, vibration isolation, and material efficiency. An exercise in balancing engineering requirements with form considerations relevant to product development roles.</p>
-      <div class="detail-media">
-        <figure class="detail-figure">
-          <img src="Speaker_stand.png" alt="Speaker stand mount CAD model" loading="lazy">
-          <figcaption>Speaker stand mount — SolidWorks</figcaption>
-        </figure>
+      <div class="media-carousel" data-slides="1">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <figure class="carousel-slide">
+              <img src="Speaker_stand.png" alt="Speaker stand mount CAD model" loading="lazy">
+              <figcaption>Speaker stand mount — SolidWorks</figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
       <div class="detail-specs">
         <div><div class="spec-label">Tool</div><div class="spec-val">SolidWorks</div></div>
@@ -853,7 +979,10 @@ function showSection(id, btn) {
 
 // Project detail expand/collapse
 function openDetail(id) {
-  document.querySelectorAll('.proj-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.proj-detail').forEach(d => {
+    d.classList.remove('open');
+    d.querySelectorAll('video').forEach(v => v.pause());
+  });
   document.querySelectorAll('.proj-card').forEach(c => c.setAttribute('aria-expanded','false'));
   var el = document.getElementById('detail-' + id);
   var card = document.getElementById('card-' + id);
@@ -862,10 +991,50 @@ function openDetail(id) {
   setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
 }
 function closeDetail(id) {
-  document.getElementById('detail-' + id).classList.remove('open');
+  var panel = document.getElementById('detail-' + id);
+  panel.classList.remove('open');
+  panel.querySelectorAll('video').forEach(v => v.pause());
   var card = document.getElementById('card-' + id);
   if (card) card.setAttribute('aria-expanded','false');
 }
+
+// Carousels
+document.querySelectorAll('.media-carousel').forEach(function(carousel) {
+  var track = carousel.querySelector('.carousel-track');
+  var slides = carousel.querySelectorAll('.carousel-slide');
+  var dots = carousel.querySelectorAll('.dot');
+  var prev = carousel.querySelector('.carousel-prev');
+  var next = carousel.querySelector('.carousel-next');
+  var idx = 0;
+
+  function go(i) {
+    idx = (i + slides.length) % slides.length;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dots.forEach(function(d, n) { d.classList.toggle('active', n === idx); });
+    slides.forEach(function(s, n) {
+      var v = s.querySelector('video');
+      if (v && n !== idx) v.pause();
+    });
+  }
+
+  if (prev) prev.addEventListener('click', function() { go(idx - 1); });
+  if (next) next.addEventListener('click', function() { go(idx + 1); });
+  dots.forEach(function(d, n) {
+    d.addEventListener('click', function() { go(n); });
+  });
+});
+
+// Arrow-key navigation for the open carousel
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  var open = document.querySelector('.proj-detail.open .media-carousel');
+  if (!open) return;
+  // skip if focus is in a video control or input
+  var tag = (document.activeElement && document.activeElement.tagName) || '';
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'VIDEO') return;
+  var btn = open.querySelector(e.key === 'ArrowLeft' ? '.carousel-prev' : '.carousel-next');
+  if (btn) btn.click();
+});
 </script>
 </body>
 </html>
