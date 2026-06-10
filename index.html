@@ -279,9 +279,12 @@ body{
   border-radius:3px;
   border:1px solid var(--line);
   background:#0a0908;
+  aspect-ratio:16 / 10;
+  max-height:480px;
 }
 .carousel-track{
   display:flex;
+  height:100%;
   transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 .carousel-slide{
@@ -290,19 +293,19 @@ body{
   margin:0;
   display:flex;
   flex-direction:column;
-  align-items:center;
   background:#0a0908;
 }
 .carousel-slide img,
 .carousel-slide video{
   display:block;
   width:100%;
-  height:auto;
-  max-height:480px;
+  min-height:0;
+  flex:1 1 0;
   object-fit:contain;
   background:#0a0908;
 }
 .carousel-slide figcaption{
+  flex-shrink:0;
   font-family:'DM Mono',monospace;
   font-size:10px;
   letter-spacing:0.1em;
@@ -587,7 +590,7 @@ footer{
       </article>
 
       <article class="proj-card" onclick="openDetail('pov')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('pov')" id="card-pov">
-        <img class="proj-cover" src="Persistence_of_Vision.png" alt="Persistence of vision display CAD render" loading="lazy">
+        <video class="proj-cover" src="POV.mp4" autoplay muted loop playsinline preload="metadata" poster="Persistence_of_Vision.png" aria-label="Persistence of vision display in motion"></video>
         <div class="proj-number">02 — Mechatronics</div>
         <h3 class="proj-title">Persistence of Vision Display</h3>
         <p class="proj-desc">Arduino Nano–controlled system synchronising an LED strip with a DC motor to render static images through the persistence-of-vision effect. Demonstrates real-time motor–LED timing coordination.</p>
@@ -667,7 +670,7 @@ footer{
               <figcaption>Real-time gesture classification demo</figcaption>
             </figure>
             <figure class="carousel-slide">
-              <video src="ProofOfConcept.mp4" controls preload="metadata" playsinline></video>
+              <video src="ProofOfConcept.mp4" controls preload="metadata" poster="Custom_EMG.jpeg" playsinline></video>
               <figcaption>Proof of concept</figcaption>
             </figure>
           </div>
