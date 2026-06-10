@@ -183,6 +183,16 @@ body{
   gap:0.8rem;
 }
 .proj-card:hover{background:var(--warm);}
+.proj-cover{
+  width:calc(100% + 3.2rem);
+  height:160px;
+  object-fit:cover;
+  margin:-1.6rem -1.6rem 0.2rem;
+  display:block;
+  background:var(--warm);
+  border-bottom:1px solid var(--line);
+}
+.proj-card:hover .proj-cover{filter:brightness(1.03);}
 .proj-number{
   font-family:'DM Mono',monospace;
   font-size:10px;
@@ -258,6 +268,36 @@ body{
   line-height:1.8;
   max-width:600px;
 }
+
+/* ── DETAIL MEDIA ── */
+.detail-media{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1rem;
+  margin-top:1.75rem;
+}
+.detail-figure{margin:0;}
+.detail-figure img,
+.detail-figure video{
+  width:100%;
+  height:auto;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:3px;
+  display:block;
+  background:var(--warm);
+  border:1px solid var(--line);
+}
+.detail-figure video{background:#000;}
+.detail-figure figcaption{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-top:6px;
+}
+
 .detail-specs{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
@@ -465,6 +505,7 @@ footer{
     <div class="proj-grid">
 
       <article class="proj-card" onclick="openDetail('emg')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('emg')" aria-expanded="false" id="card-emg">
+        <img class="proj-cover" src="Custom_EMG.jpeg" alt="Custom triple-channel EMG sensor PCB" loading="lazy">
         <div class="proj-number">01 — Mechatronics</div>
         <h3 class="proj-title">Real-time EMG Gesture Recognition</h3>
         <p class="proj-desc">Triple-channel custom EMG sensors with signal processing algorithms to classify hand gestures in real time. Started as a choreography aid, evolved into a health-monitoring platform concept.</p>
@@ -477,6 +518,7 @@ footer{
       </article>
 
       <article class="proj-card" onclick="openDetail('pov')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('pov')" id="card-pov">
+        <img class="proj-cover" src="Persistence_of_Vision.png" alt="Persistence of vision display CAD render" loading="lazy">
         <div class="proj-number">02 — Mechatronics</div>
         <h3 class="proj-title">Persistence of Vision Display</h3>
         <p class="proj-desc">Arduino Nano–controlled system synchronising an LED strip with a DC motor to render static images through the persistence-of-vision effect. Demonstrates real-time motor–LED timing coordination.</p>
@@ -488,6 +530,7 @@ footer{
       </article>
 
       <article class="proj-card" onclick="openDetail('pump')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('pump')" id="card-pump">
+        <img class="proj-cover" src="Peristaltic_Pump.jpeg" alt="Peristaltic pump prototype" loading="lazy">
         <div class="proj-number">03 — Mechanical</div>
         <h3 class="proj-title">Peristaltic Pump Prototype</h3>
         <p class="proj-desc">Reverse-engineered and redesigned an existing peristaltic pump for improved manufacturability and broader application range. Focus on DFM, tolerancing, and assembly simplification.</p>
@@ -499,6 +542,7 @@ footer{
       </article>
 
       <article class="proj-card" onclick="openDetail('valve')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('valve')" id="card-valve">
+        <img class="proj-cover" src="Automating_valve.jpeg" alt="Valve automation actuator mounting" loading="lazy">
         <div class="proj-number">04 — Mechatronics</div>
         <h3 class="proj-title">Valve Automation System</h3>
         <p class="proj-desc">Designed and integrated an actuation solution for automating industrial valve operation. Covers mechanical mounting, actuator selection, and control interfacing.</p>
@@ -510,6 +554,7 @@ footer{
       </article>
 
       <article class="proj-card" onclick="openDetail('cart')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('cart')" id="card-cart">
+        <img class="proj-cover" src="Cart.png" alt="Cart assembly CAD model" loading="lazy">
         <div class="proj-number">05 — CAD</div>
         <h3 class="proj-title">Cart Assembly — SolidWorks &amp; CREO</h3>
         <p class="proj-desc">Full parametric cart assembly modelled in both SolidWorks and CREO, including detailed engineering drawings with GD&amp;T annotations. An exercise in cross-platform CAD fluency.</p>
@@ -522,6 +567,7 @@ footer{
       </article>
 
       <article class="proj-card" onclick="openDetail('speaker')" tabindex="0" onkeydown="if(event.key==='Enter')openDetail('speaker')" id="card-speaker">
+        <img class="proj-cover" src="Speaker_stand.png" alt="Speaker stand mount CAD model" loading="lazy">
         <div class="proj-number">06 — CAD</div>
         <h3 class="proj-title">Speaker Stand Mount</h3>
         <p class="proj-desc">Parametric speaker stand design with focus on structural rigidity, vibration damping considerations, and clean aesthetics. Demonstrates consumer product CAD sensibility.</p>
@@ -540,6 +586,16 @@ footer{
       <div class="detail-label">Project 01 — Mechatronics</div>
       <h3 class="detail-title">Real-time EMG Gesture Recognition</h3>
       <p class="detail-body">A triple-channel electromyography (EMG) sensor system built from scratch to capture and classify muscle signals in real time. Custom analog front-end circuits amplify and filter raw bio-signals before a microcontroller runs signal-processing algorithms to distinguish gesture classes. The system was initially conceived to record arm movements for classical dance choreography, then extended toward a broader health and injury-prevention monitoring concept.</p>
+      <div class="detail-media">
+        <figure class="detail-figure">
+          <img src="Custom_EMG.jpeg" alt="Custom 3-channel EMG sensor hardware" loading="lazy">
+          <figcaption>Custom 3-channel EMG front-end</figcaption>
+        </figure>
+        <figure class="detail-figure">
+          <video src="Gesture_Recognition.mp4" controls preload="metadata" poster="Custom_EMG.jpeg" playsinline></video>
+          <figcaption>Real-time gesture classification demo</figcaption>
+        </figure>
+      </div>
       <div class="detail-specs">
         <div><div class="spec-label">Channels</div><div class="spec-val">3 × custom EMG</div></div>
         <div><div class="spec-label">Interface</div><div class="spec-val">Real-time classification</div></div>
@@ -553,6 +609,12 @@ footer{
       <div class="detail-label">Project 02 — Mechatronics</div>
       <h3 class="detail-title">Persistence of Vision Display</h3>
       <p class="detail-body">An Arduino Nano orchestrates a spinning LED strip and DC motor to produce the persistence-of-vision illusion — where a rapidly sweeping row of LEDs appears as a full 2D image to the human eye. The core challenge is precise timing synchronisation between the motor's rotational speed and the LED update rate. The project demonstrates real-time interrupt handling, PWM motor control, and LED driver coding.</p>
+      <div class="detail-media">
+        <figure class="detail-figure">
+          <img src="Persistence_of_Vision.png" alt="Persistence of vision display CAD render" loading="lazy">
+          <figcaption>CAD model — POV display assembly</figcaption>
+        </figure>
+      </div>
       <div class="detail-specs">
         <div><div class="spec-label">Controller</div><div class="spec-val">Arduino Nano</div></div>
         <div><div class="spec-label">Actuation</div><div class="spec-val">DC motor + LED strip</div></div>
@@ -566,6 +628,12 @@ footer{
       <div class="detail-label">Project 03 — Mechanical</div>
       <h3 class="detail-title">Peristaltic Pump Prototype</h3>
       <p class="detail-body">Starting from an existing peristaltic pump design, this project reverse-engineered the mechanism to understand its principles and then redesigned key components for ease of manufacture and broader application. Improvements focused on simplifying the rotor geometry, reducing part count, and specifying tolerances that support low-cost fabrication methods without sacrificing performance.</p>
+      <div class="detail-media">
+        <figure class="detail-figure">
+          <img src="Peristaltic_Pump.jpeg" alt="Peristaltic pump prototype" loading="lazy">
+          <figcaption>Redesigned peristaltic pump prototype</figcaption>
+        </figure>
+      </div>
       <div class="detail-specs">
         <div><div class="spec-label">Method</div><div class="spec-val">Reverse engineering</div></div>
         <div><div class="spec-label">Focus</div><div class="spec-val">DFM + manufacturability</div></div>
@@ -579,6 +647,16 @@ footer{
       <div class="detail-label">Project 04 — Mechatronics</div>
       <h3 class="detail-title">Valve Automation System</h3>
       <p class="detail-body">Designed an electromechanical solution to automate the operation of an existing manual valve. The work covered actuator selection, mechanical bracket and coupling design to mount the actuator onto the valve body, and control interfacing to enable remote or automated operation. Special attention was paid to maintaining back-compatibility with manual override.</p>
+      <div class="detail-media">
+        <figure class="detail-figure">
+          <img src="Automating_valve.jpeg" alt="Valve automation — actuator mounting" loading="lazy">
+          <figcaption>Actuator mounting assembly</figcaption>
+        </figure>
+        <figure class="detail-figure">
+          <img src="Automating_valve1.jpeg" alt="Valve automation — integrated view" loading="lazy">
+          <figcaption>Integrated system view</figcaption>
+        </figure>
+      </div>
       <div class="detail-specs">
         <div><div class="spec-label">Type</div><div class="spec-val">Valve automation</div></div>
         <div><div class="spec-label">Actuation</div><div class="spec-val">Electromechanical</div></div>
@@ -592,6 +670,16 @@ footer{
       <div class="detail-label">Project 05 — CAD</div>
       <h3 class="detail-title">Cart Assembly — SolidWorks &amp; CREO</h3>
       <p class="detail-body">A fully parametric cart assembly modelled in parallel in SolidWorks and CREO to develop fluency across both platforms. Deliverables include a complete assembly with mated components and formal engineering drawings annotated with GD&amp;T callouts per ASME Y14.5. The project reinforces best practices in part modelling, assembly constraints, and drawing standards.</p>
+      <div class="detail-media">
+        <figure class="detail-figure">
+          <img src="Cart.png" alt="Cart assembly — 3D model" loading="lazy">
+          <figcaption>Parametric cart assembly</figcaption>
+        </figure>
+        <figure class="detail-figure">
+          <img src="Cart_Drawing.png" alt="Cart engineering drawing with GD&T" loading="lazy">
+          <figcaption>Engineering drawing — GD&amp;T per ASME Y14.5</figcaption>
+        </figure>
+      </div>
       <div class="detail-specs">
         <div><div class="spec-label">Tools</div><div class="spec-val">SolidWorks + CREO</div></div>
         <div><div class="spec-label">Standard</div><div class="spec-val">ASME Y14.5 GD&amp;T</div></div>
@@ -605,6 +693,12 @@ footer{
       <div class="detail-label">Project 06 — CAD</div>
       <h3 class="detail-title">Speaker Stand Mount</h3>
       <p class="detail-body">A parametric CAD model for a speaker stand mount combining structural rigidity with clean consumer-product aesthetics. The design accounts for load paths, vibration isolation, and material efficiency. An exercise in balancing engineering requirements with form considerations relevant to product development roles.</p>
+      <div class="detail-media">
+        <figure class="detail-figure">
+          <img src="Speaker_stand.png" alt="Speaker stand mount CAD model" loading="lazy">
+          <figcaption>Speaker stand mount — SolidWorks</figcaption>
+        </figure>
+      </div>
       <div class="detail-specs">
         <div><div class="spec-label">Tool</div><div class="spec-val">SolidWorks</div></div>
         <div><div class="spec-label">Focus</div><div class="spec-val">Structure + aesthetics</div></div>
@@ -711,20 +805,18 @@ footer{
           <div class="contact-value">Deep-sab / Mechanical-Mechatronics-Portfolio</div>
         </div>
       </a>
-      <!-- ✏️ Replace the href and value below with your actual email -->
-      <a class="contact-row" href="mailto:your@email.com">
+      <a class="contact-row" href="mailto:deeptha06@gmail.com">
         <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
         <div>
           <div class="contact-label">Email</div>
-          <div class="contact-value">your@email.com</div>
+          <div class="contact-value">deeptha06@gmail.com</div>
         </div>
       </a>
-      <!-- ✏️ Replace the href and value below with your LinkedIn URL -->
-      <a class="contact-row" href="https://linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">
+      <a class="contact-row" href="https://www.linkedin.com/in/deepsab290677/" target="_blank" rel="noopener">
         <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         <div>
           <div class="contact-label">LinkedIn</div>
-          <div class="contact-value">linkedin.com/in/YOUR-HANDLE</div>
+          <div class="contact-value">linkedin.com/in/deepsab290677</div>
         </div>
       </a>
     </div>
